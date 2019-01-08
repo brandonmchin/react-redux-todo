@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "author": "Brandon Chin",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/brandonmchin/...git"
-  },
   "scripts": {
     "start": "nodemon bin/dev",
     "clean": "rm -rf build",

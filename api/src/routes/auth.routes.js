@@ -38,7 +38,7 @@ router.post('/login', validate, (req, res, next) => {
   const { username, password } = req.body;
   authService.login({ username, password })
   .then((result) => {
-    return res.json({ result });
+    return res.json(result);
   })
   .catch((error) => {
     next(error);

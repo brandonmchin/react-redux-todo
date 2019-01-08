@@ -51,7 +51,7 @@ const login = (user) => {
         bcrypt.compare(user.password, userdata.password)
         .then((isMatch) => {
           if (isMatch) {
-            const token = jwt.sign({ userid: user.user_id, username: user.username }, process.env.JWT_KEY, {
+            const token = jwt.sign({ userid: userdata.user_id }, process.env.JWT_KEY, {
               expiresIn: 600  // 10 minutes
             });
             resolve({ token });
