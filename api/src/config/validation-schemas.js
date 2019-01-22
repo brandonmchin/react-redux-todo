@@ -13,6 +13,6 @@ const loginDataSchema = joi.object().keys({
 });
 
 export const validationSchemas = {
-  '/register': registerDataSchema,
-  '/login': loginDataSchema
+  '/api/auth/register': registerDataSchema,
+  '/api/auth/login': loginDataSchema
 }

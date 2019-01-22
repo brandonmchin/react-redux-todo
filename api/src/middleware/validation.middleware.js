@@ -21,7 +21,7 @@ export const validate = (req, res, next) => {
     stripUnknown: true  // remove unknown keys from the validated data
   };
 
-  const route = req.route.path;
+  const route = req.originalUrl;
 
   if (validationSchemas.hasOwnProperty(route)) {
     const schema = validationSchemas[route];
