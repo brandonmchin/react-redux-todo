@@ -1,5 +1,6 @@
 # dependencies
 api/node_modules
+client/node_modules
 
 # database (all except initialization script)
 database/*
@@ -13,9 +14,13 @@ api/build
 
 # misc
 api/package-lock.json
+client/package-lock.json
 
 api/npm-debug.log*
 api/yarn-debug.log*
 api/yarn-error.log*
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
 
 **/.DS_Store
