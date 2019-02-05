@@ -7,7 +7,7 @@ import morgan from 'morgan';
 
 import { db } from './config';
 import { errorHandler } from './middleware';
-import { users, auth } from './routes';
+import { users, auth, tasks } from './routes';
 
 const app = express();
 
@@ -35,6 +35,7 @@ app.get('/api', (req, res) => {
 // API routes
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+app.use('/api/tasks', tasks);
 
 app.use(errorHandler);  // global error handler
 

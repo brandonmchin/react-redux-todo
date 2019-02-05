@@ -1,6 +1,6 @@
-# DOCKER NODE JWT API TEMPLATE
+# REACT MYSQL DOCKER TODO APP
 
-### A template that is used to setup the backend for a Node.js application.
+### A simple todo app
 
 ## START
 
