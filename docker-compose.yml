@@ -1,56 +1,6 @@
 version: '3'
 
 services:
-
-  mysql:
-    container_name: mysql-server
-    image: mysql:8.0.12
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD_DEV}
-      MYSQL_DATABASE: ${MYSQL_DATABASE_DEV}
-    expose:
-      - 3306
-    ports:
-      - 3306:3306
-    volumes:
-      - "./database/datadev:/var/lib/mysql:rw"  # mount to store data on host machine (w/ read/write access)
-      - "./database/init.sql:/docker-entrypoint-initdb.d/init.sql"  # mount to run database initialization
-    restart: always
-
-  api:
-    container_name: node-api
-    build: ./api
-    expose:
-      - 5000
-    environment:
-      NODE_ENV: development
-      JWT_KEY: ${JWT_KEY}
-      MYSQL_HOST: ${MYSQL_HOST_DEV}
-      MYSQL_PORT: ${MYSQL_PORT_DEV}
-      MYSQL_USER: ${MYSQL_USER_DEV}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD_DEV}
-      MYSQL_DATABASE: ${MYSQL_DATABASE_DEV}
-    ports:
-      - "5000:5000"
-    volumes:
-      - "./api:/usr/app"  # enables local changes to be reflected in the container
-      - "/usr/app/node_modules"  # mount the node_modules directory to the host machine
-    depends_on:  # NOTE: this does not actually wait until dependencies are ready, only that they have started
-      - mysql
-    links:
-      - mysql
-    restart: always
-    command: ["./wait-for-it.sh", "mysql:3306", "--", "npm", "start"]
-
-  # migration:  # after the mysql container is ready, the migration script will automaticaly run
-  #   container_name: migration
-  #   image: api:latest
-  #   command: ["./wait-for-it.sh", "mysql:3306", "--","npm", "run", "migrate"]
-  #   depends_on:
-  #     - mysql
-  #   links:
-  #     - mysql
-
   client:
     container_name: react-client
     build: ./client
@@ -61,8 +11,4 @@ services:
     volumes:
       - "./client:/usr/app"  # enables local changes to be reflected in the container
       - "/usr/app/node_modules"  # mount the node_modules directory to the host machine
-    depends_on:
-      - api
-    links:
-      - api
     restart: always

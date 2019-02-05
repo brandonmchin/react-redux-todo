@@ -4,6 +4,16 @@
 
 ## START
 
+Requires [Node.js](https://nodejs.org/en/download/)
+
+```
+$ cd client/
+$ npm install
+$ npm start
+```
+
+## RUN DOCKER
+
 Requires [Docker Engine && Docker Compose](https://docs.docker.com/install/)
 
 Build and start the containers
