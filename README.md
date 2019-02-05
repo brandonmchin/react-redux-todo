@@ -1,4 +1,4 @@
-# REACT MYSQL DOCKER TODO APP
+# DOCKER REACT TODO APP
 
 ### A simple todo app
 
@@ -7,7 +7,7 @@
 Requires [Node.js](https://nodejs.org/en/download/)
 
 ```
-$ cd client/
+$ cd app/
 $ npm install
 $ npm start
 ```

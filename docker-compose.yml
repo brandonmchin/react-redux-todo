@@ -3,12 +3,12 @@ version: '3'
 services:
   client:
     container_name: react-client
-    build: ./client
+    build: ./app
     expose:
       - 3000
     ports:
       - "3000:3000"
     volumes:
-      - "./client:/usr/app"  # enables local changes to be reflected in the container
+      - "./app:/usr/app"  # enables local changes to be reflected in the container
       - "/usr/app/node_modules"  # mount the node_modules directory to the host machine
     restart: always
