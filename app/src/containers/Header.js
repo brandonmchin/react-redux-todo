@@ -3,4 +3,8 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import { addTodo } from '../actions';
 
-export default connect(null, { addTodo })(Header);
+const mapDispatchToProps = dispatch => ({
+  addTodo: (text) => dispatch(addTodo(text))
+});
+
+export default connect(null, mapDispatchToProps)(Header);

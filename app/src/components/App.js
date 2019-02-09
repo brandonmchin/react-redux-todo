@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardContent } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -7,27 +8,27 @@ import Main from '../containers/Main';
 
 
 const styles = () => ({
-  card: {
+  container: {
     margin: 'auto',
     marginTop: '40px',
-    textAlign: 'center',
     width: 800,
-    color: '#CCC'
-  },
-  title: {
     color: '#CCC'
   }
 });
 
-const App = ({ classes }) => (
-  <div>
-    <Card className={classes.card}>
+const App = (props) => (
+  <div className={props.classes.container}>
+    <Card>
       <CardContent>
-        <Header classes={classes}/>
+        <Header />
         <Main />
       </CardContent>
     </Card>
   </div>
 );
+
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+}
 
 export default withStyles(styles)(App);

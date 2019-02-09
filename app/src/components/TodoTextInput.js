@@ -3,14 +3,6 @@ import PropTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
 
 class TodoTextInput extends Component {
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    text: PropTypes.string,
-    placeholder: PropTypes.string,
-    editing: PropTypes.bool,
-    newTodo: PropTypes.bool
-  }
-
   state = {
     text: this.props.text || ''
   }
@@ -47,12 +39,21 @@ class TodoTextInput extends Component {
         margin='normal'
         fullWidth
         autoFocus
+        value={this.state.text}
         onBlur={this.handleBlur}
         onChange={this.handleChange}
         onKeyDown={this.handleSubmit}
       />
     );
   }
+}
+
+TodoTextInput.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  text: PropTypes.string,
+  placeholder: PropTypes.string,
+  editing: PropTypes.bool,
+  newTodo: PropTypes.bool
 }
 
 export default TodoTextInput;

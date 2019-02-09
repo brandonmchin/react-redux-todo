@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 import TodoTextInput from './TodoTextInput';
 
-class Header extends Component {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    addTodo: PropTypes.func.isRequired
+const styles = () => ({
+  title: {
+    textAlign: 'center',
+    color: '#CCC'
   }
+});
 
+class Header extends Component {
   handleSubmit = (text) => {
     if (text.length !== 0) {
       this.props.addTodo(text);
@@ -26,4 +29,9 @@ class Header extends Component {
   }
 }
 
-export default Header;
+Header.propTypes = {
+  classes: PropTypes.object.isRequired,
+  addTodo: PropTypes.func.isRequired
+}
+
+export default withStyles(styles)(Header);

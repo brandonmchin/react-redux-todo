@@ -1,23 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Checkbox } from '@material-ui/core';
+import { DoneAll, CheckBoxOutlineBlank } from '@material-ui/icons';
 
 import VisibleTodoList from '../containers/VisibleTodoList';
-// import Footer from './Footer';
+import Footer from './Footer';
+// import FooterTabs from 'FooterTabs';
 
 const Main = ({ todoCount, completedCount, actions }) => (
   <div>
     {
       !!todoCount && 
-      <span>
-        <input type='checkbox' checked={completedCount === todoCount} readOnly />
-        <label onClick={actions.completeAllTodos} />
-      </span>
+      <div>
+        <Checkbox 
+          style={{margin: '0 10px'}}
+          checked={completedCount === todoCount} 
+          onChange={actions.completeAllTodos}
+          color="primary" 
+          icon={<CheckBoxOutlineBlank />} 
+          checkedIcon={<DoneAll />} 
+        />
+        <label>Complete All</label>
+      </div>
     }
     <VisibleTodoList />
-    {/* {
+    {
       !!todoCount &&
       <Footer completedCount={completedCount} activeCount={todoCount - completedCount} onClearCompleted={actions.clearCompleted} />
-    } */}
+    }
   </div>
 );
 

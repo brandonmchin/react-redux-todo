@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as todoActions from '../actions';
+import * as actions from '../actions';
 import Main from '../components/Main';
 import { getCompletedTodoCount } from '../selectors';
 
@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 });
 
 const MapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(todoActions, dispatch)
+  actions: bindActionCreators(actions, dispatch)
 });
 
 export default connect(mapStateToProps, MapDispatchToProps)(Main);

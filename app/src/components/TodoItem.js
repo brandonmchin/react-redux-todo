@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ListItem, Checkbox, IconButton } from '@material-ui/core';
+import { Clear } from '@material-ui/icons';
+import { withStyles } from '@material-ui/core/styles';
 
 import TodoTextInput from './TodoTextInput';
 
-class TodoItem extends Component {
-  static propTypes = {
-    todo: PropTypes.object.isRequired,
-    editTodo: PropTypes.func.isRequired,
-    deleteTodo: PropTypes.func.isRequired,
-    completeTodo: PropTypes.func.isRequired
+const styles = () => ({
+  item: {
+    backgroundColor: '#555',
+    '&:hover': {
+      backgroundColor: '#666'
+    }
+  },
+  delete: {
+    margin: 0,
+    position: 'absolute',
+    right: '18px',
+    top: '50%',
+    transform: 'translateY(-50%)'
+  },
+  completed: {
+    textDecoration: 'line-through'
   }
+});
 
+class TodoItem extends Component {
   state = {
     editing: false
   }
@@ -34,7 +49,7 @@ class TodoItem extends Component {
   }
 
   render() {
-    const { todo, completeTodo, deleteTodo } = this.props;
+    const { todo, completeTodo, deleteTodo, classes } = this.props;
     
     let element;
     if (this.state.editing) {
@@ -45,17 +60,28 @@ class TodoItem extends Component {
     else {
       element = (
         <div>
-          <input type='checkbox' checked={!todo.isActive} onChange={() => completeTodo(todo.id)} />
-          <label onDoubleClick={this.handleDoubleClick}>{todo.text}</label>
-          <button onClick={() => deleteTodo(todo.id)} />
+          <label className={!todo.isActive ? classes.completed : {}}>{todo.id}: {todo.text}</label>
+          <IconButton className={classes.delete} onClick={() => deleteTodo(todo.id)}>
+            <Clear />
+          </IconButton>
         </div>
       );
     }
 
     return (
-      <li>{element}</li>
+      <ListItem className={classes.item} onDoubleClick={this.handleDoubleClick} button disableRipple>
+        <Checkbox checked={!todo.isActive} onChange={() => completeTodo(todo.id)} color="primary"/>
+        {element}
+      </ListItem>
     );
   }
 }
 
-export default TodoItem;
+TodoItem.propTypes = {
+  todo: PropTypes.object.isRequired,
+  editTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+  completeTodo: PropTypes.func.isRequired
+}
+
+export default withStyles(styles)(TodoItem);

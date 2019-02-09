@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { List } from '@material-ui/core'
 
 import TodoItem from './TodoItem';
 
 const TodoList = ({ filteredTodos, actions }) => (
-  <ul>
-    {filteredTodos.map(todo =>
+  <List>
+    {filteredTodos.map(todo => 
       <TodoItem key={todo.id} todo={todo} {...actions} />
     )}
-  </ul>
+  </List>
 );
 
 TodoList.propTypes = {
