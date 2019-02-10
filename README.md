@@ -1,4 +1,4 @@
-# DOCKER REACT TODO APP
+# REACT REDUX TODO APP
 
 ### A simple todo app using React, Redux, and Material-UI
 
