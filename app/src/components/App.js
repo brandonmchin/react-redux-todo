@@ -1,23 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Card, CardContent } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 
 import Header from '../containers/Header';
 import Main from '../containers/Main';
 
-
-const styles = () => ({
+const styles = {
   container: {
-    margin: 'auto',
-    marginTop: '40px',
+    margin: '40px auto',
     width: 800,
     color: '#CCC'
   }
-});
+};
 
-const App = (props) => (
-  <div className={props.classes.container}>
+const App = () => (
+  <div style={styles.container}>
     <Card>
       <CardContent>
         <Header />
@@ -27,8 +23,4 @@ const App = (props) => (
   </div>
 );
 
-App.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles)(App);
+export default App;

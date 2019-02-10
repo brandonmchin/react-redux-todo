@@ -5,7 +5,6 @@ import { DoneAll, CheckBoxOutlineBlank } from '@material-ui/icons';
 
 import VisibleTodoList from '../containers/VisibleTodoList';
 import Footer from './Footer';
-// import FooterTabs from 'FooterTabs';
 
 const Main = ({ todoCount, completedCount, actions }) => (
   <div>
@@ -13,7 +12,6 @@ const Main = ({ todoCount, completedCount, actions }) => (
       !!todoCount && 
       <div>
         <Checkbox 
-          style={{margin: '0 10px'}}
           checked={completedCount === todoCount} 
           onChange={actions.completeAllTodos}
           color="primary" 

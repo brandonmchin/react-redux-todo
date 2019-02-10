@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Tab } from '@material-ui/core';
 
 const Link = (props) => {
-  const { active, children, setFilter } = props;
+  const { setFilter } = props;
 
   return (
-    <a onClick={() => setFilter()}>{children}</a>
+    <Tab component='a' onClick={() => setFilter()} {...props} />
   );
 }
 
 Link.propTypes = {
-  active: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired,
   setFilter: PropTypes.func.isRequired
 }
 

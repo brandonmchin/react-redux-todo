@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as actions from '../actions';
 import Main from '../components/Main';
+import * as actions from '../actions';
 import { getCompletedTodoCount } from '../selectors';
 
 const mapStateToProps = state => ({

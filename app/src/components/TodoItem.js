@@ -60,7 +60,7 @@ class TodoItem extends Component {
     else {
       element = (
         <div>
-          <label className={!todo.isActive ? classes.completed : {}}>{todo.id}: {todo.text}</label>
+          <label className={!todo.isActive ? classes.completed : {}}>{todo.text}</label>
           <IconButton className={classes.delete} onClick={() => deleteTodo(todo.id)}>
             <Clear />
           </IconButton>

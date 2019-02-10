@@ -1,6 +1,6 @@
 # DOCKER REACT TODO APP
 
-### A simple todo app
+### A simple todo app using React, Redux, and Material-UI
 
 ## START
 
@@ -41,28 +41,7 @@ Show running containers
 $ docker ps
 ```
 
-Once a container is running, we can execute a command inside that container (e.g. view mysql database)
+Once a container is running, we can execute a command inside that container
 ```
 $ docker exec -it <CONTAINER ID/NAME> bin/bash
-$ docker exec -it <CONTAINER ID/NAME> mysql -u "root" -p
-```
-
----
-## NOTES
-
-Using MySQL 8.0, the following error may occur:
-
-```
-ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client
-```
-
-To fix the error, try the following:
-
-```
-  $ docker exec -it <CONTAINER ID/NAME> mysql -u "root" -p
-  Enter password:
-  
-  mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '{your password}';
-  mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '{your password}';
-  mysql> SELECT plugin FROM mysql.user WHERE User = 'root';
 ```

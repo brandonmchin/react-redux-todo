@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
 import TodoTextInput from './TodoTextInput';
 
-const styles = () => ({
+const styles = {
   title: {
     textAlign: 'center',
-    color: '#CCC'
+    color:'#CCC'
   }
-});
+};
 
 class Header extends Component {
   handleSubmit = (text) => {
@@ -19,10 +18,9 @@ class Header extends Component {
   }
 
   render() {
-    const { classes } = this.props;
     return (
       <div>
-        <h1 className={classes.title}>TODO LIST</h1>
+        <h1 style={styles.title}>TODO LIST</h1>
         <TodoTextInput newTodo onSubmit={this.handleSubmit} placeholder="What needs to be done?" />
       </div>
     );
@@ -30,8 +28,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired,
   addTodo: PropTypes.func.isRequired
 }
 
-export default withStyles(styles)(Header);
+export default (Header);
