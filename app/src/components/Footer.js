@@ -54,7 +54,7 @@ class Footer extends Component {
         <Tabs value={this.state.filterIndex} onChange={this.handleChange} indicatorColor='primary' centered>
           {
             Object.keys(FILTER_TITLES).map(filter => (
-              <FilterLink label={FILTER_TITLES[filter]} filter={filter} />
+              <FilterLink key={filter} label={FILTER_TITLES[filter]} filter={filter} />
             ))
           }
         </Tabs>

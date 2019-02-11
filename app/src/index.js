@@ -10,6 +10,9 @@ import { store } from './config';
 const theme = createMuiTheme({
   palette: {
     type: 'dark'
+  },
+  typography: {
+    useNextVariants: true
   }
 });
 
