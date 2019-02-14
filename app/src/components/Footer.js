@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Divider, Button, Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 import FilterLink from '../containers/FilterLink';
 import * as types from '../constants';
@@ -35,14 +36,14 @@ class Footer extends Component {
   }
 
   render() {
-    const { activeCount, completedCount, onClearCompleted } = this.props;
+    const { classes, activeCount, completedCount, onClearCompleted } = this.props;
     const itemWord = activeCount === 1 ? 'item' : 'items';
 
     return (
       <footer>
-        <Grid style={styles.grid} container spacing={24}>
-          <Grid style={styles.count} item xs={6}><strong>{activeCount || 'No'}</strong> {itemWord} remaining</Grid>
-          <Grid style={styles.clear} item xs={6}>
+        <Grid className={classes.grid} container spacing={24}>
+          <Grid className={classes.count} item xs={6}><strong>{activeCount || 'No'}</strong> {itemWord} remaining</Grid>
+          <Grid className={classes.clear} item xs={6}>
             &nbsp;
             {
               !!completedCount &&
@@ -64,9 +65,10 @@ class Footer extends Component {
 }
 
 Footer.propTypes = {
+  classes: PropTypes.object.isRequired,
   completedCount: PropTypes.number.isRequired,
   activeCount: PropTypes.number.isRequired,
   onClearCompleted: PropTypes.func.isRequired
 }
 
-export default Footer;
+export default withStyles(styles)(Footer);

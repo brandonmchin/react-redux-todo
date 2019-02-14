@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import TodoTextInput from './TodoTextInput';
+import { withStyles } from '@material-ui/core';
 
 const styles = {
   title: {
@@ -18,9 +19,10 @@ class Header extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
-        <h1 style={styles.title}>TODO LIST</h1>
+        <h1 className={classes.title}>TODO LIST</h1>
         <TodoTextInput newTodo onSubmit={this.handleSubmit} placeholder="What needs to be done?" />
       </div>
     );
@@ -28,7 +30,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
+  classes: PropTypes.object.isRequired,
   addTodo: PropTypes.func.isRequired
 }
 
-export default (Header);
+export default withStyles(styles)(Header);

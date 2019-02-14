@@ -1,6 +1,11 @@
-import React from 'react';
-import { Card, CardContent } from '@material-ui/core';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { CssBaseline, Card, CardContent } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core/styles';
 
+import { themes } from '../config';
+import SettingsMenu from './SettingsMenu';
+// import SettingsMenu from '../containers/SettingsMenu';
 import Header from '../containers/Header';
 import Main from '../containers/Main';
 
@@ -12,15 +17,42 @@ const styles = {
   }
 };
 
-const App = () => (
-  <div style={styles.container}>
-    <Card>
-      <CardContent>
-        <Header />
-        <Main />
-      </CardContent>
-    </Card>
-  </div>
-);
+class App extends Component {
+  state = {
+    theme: 'dark'
+  };
 
-export default App;
+  handleChangeTheme = theme => {
+    this.setState({
+      theme
+    });
+  }
+
+  render() {
+    const { classes } = this.props;
+
+    const themeBase = this.state.theme === 'dark' ? themes.dark : themes.light;
+    const theme = createMuiTheme(themeBase);
+
+    return (
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className={classes.container}>
+          <Card>
+            <CardContent>
+              <SettingsMenu onChangeTheme={this.handleChangeTheme} theme={this.state.theme} />
+              <Header />
+              <Main />
+            </CardContent>
+          </Card>
+        </div>
+      </MuiThemeProvider>
+    );
+  }
+}
+
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(App);

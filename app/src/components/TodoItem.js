@@ -6,12 +6,13 @@ import { withStyles } from '@material-ui/core/styles';
 
 import TodoTextInput from './TodoTextInput';
 
-const styles = () => ({
+const styles = theme => ({
   item: {
-    backgroundColor: '#555',
-    '&:hover': {
-      backgroundColor: '#666'
-    }
+    // backgroundColor: '#555',
+    // backgroundColor: theme.palette.type === 'dark' ? '#555' : '#FFF',
+    // '&:hover': {
+    //   backgroundColor: theme.palette.type === 'dark' ? '#666' : '#FFF'
+    // }
   },
   delete: {
     margin: 0,
@@ -20,8 +21,16 @@ const styles = () => ({
     top: '50%',
     transform: 'translateY(-50%)'
   },
+  active: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  },
   completed: {
-    textDecoration: 'line-through'
+    textDecoration: 'line-through',
+    '&:hover': {
+      cursor: 'pointer'
+    }
   }
 });
 
@@ -60,7 +69,7 @@ class TodoItem extends Component {
     else {
       element = (
         <div>
-          <label className={!todo.isActive ? classes.completed : {}}>{todo.text}</label>
+          <label className={todo.isActive ? classes.active : classes.completed}>{todo.text}</label>
           <IconButton className={classes.delete} onClick={() => deleteTodo(todo.id)}>
             <Clear />
           </IconButton>
@@ -69,7 +78,7 @@ class TodoItem extends Component {
     }
 
     return (
-      <ListItem className={classes.item} onDoubleClick={this.handleDoubleClick} button disableRipple>
+      <ListItem className={classes.item} onDoubleClick={this.handleDoubleClick} button disableRipple divider>
         <Checkbox checked={!todo.isActive} onChange={() => completeTodo(todo.id)} color="primary"/>
         {element}
       </ListItem>
@@ -78,6 +87,7 @@ class TodoItem extends Component {
 }
 
 TodoItem.propTypes = {
+  classes: PropTypes.object.isRequired,
   todo: PropTypes.object.isRequired,
   editTodo: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
