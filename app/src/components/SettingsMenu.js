@@ -22,6 +22,11 @@ const COLORS = {
 };
 
 const styles = {
+  icon: {
+    position: 'absolute',
+    top: 0,
+    right: 0
+  },
   settings: {
     height: '40%'
   },
@@ -87,7 +92,7 @@ class SettingsMenu extends Component {
 
     return (
       <div>
-        <IconButton className={classes.settings} onClick={this.openSettings}>
+        <IconButton className={classes.icon} onClick={this.openSettings}>
           <Settings />
         </IconButton>
         <Dialog className={classes.settings} open={this.state.open} TransitionComponent={Transition} onClose={this.closeSettings}>

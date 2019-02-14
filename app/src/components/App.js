@@ -10,7 +10,8 @@ import Header from '../containers/Header';
 import Main from '../containers/Main';
 
 const styles = {
-  container: {
+  root: {
+    position: 'relative',
     margin: '40px auto',
     width: 800,
     color: '#CCC'
@@ -37,7 +38,7 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <div className={classes.container}>
+        <div className={classes.root}>
           <Card>
             <CardContent>
               <SettingsMenu onChangeTheme={this.handleChangeTheme} theme={this.state.theme} />
