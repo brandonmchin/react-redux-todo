@@ -5,7 +5,6 @@ import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core/
 
 import { themes } from '../config';
 import SettingsMenu from './SettingsMenu';
-// import SettingsMenu from '../containers/SettingsMenu';
 import Header from '../containers/Header';
 import Main from '../containers/Main';
 

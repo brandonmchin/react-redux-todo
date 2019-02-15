@@ -6,7 +6,6 @@ import {
   DialogTitle, 
   DialogContent, 
   Slide,
-  FormControl, 
   FormControlLabel, 
   Switch, 
   RadioGroup, 
@@ -65,9 +64,6 @@ const styles = () => ({
     top: 0,
     right: 0
   },
-  dialog: {
-    height: '40%'
-  },
   title: {
     textAlign: 'center'
   }
@@ -114,39 +110,53 @@ class SettingsMenu extends Component {
         <IconButton className={classes.icon} onClick={this.openSettings}>
           <Settings />
         </IconButton>
-        <Dialog className={classes.dialog} open={this.state.open} TransitionComponent={Transition} onClose={this.closeSettings}>
+        <Dialog open={this.state.open} TransitionComponent={Transition} onClose={this.closeSettings} keepMounted fullWidth>
           <DialogTitle className={classes.title}>Settings</DialogTitle>
           <DialogContent>
             <FormControlLabel
-              // className={classes.item}
               control={
                 <Switch checked={theme.palette.type === 'dark'} onChange={this.handleChangeTheme} color='primary' />
               }
               label='Dark Theme'
             />
-            {/* <FormControl>
-              <RadioGroup row className={classes.settingsItem} value={this.state.colorScheme} onChange={this.handleChange('colorScheme')}>
-                <FormControlLabel 
-                  value={COLORS['blue']} 
-                  control={
-                    <Radio classes={{root: classes.blue, checked: classes.checked}} />
-                  }
-                />
-                <FormControlLabel 
-                  value={COLORS['red']} 
-                  control={
-                    <Radio classes={{root: classes.red, checked: classes.checked}} />
-                  }
-                />
-                <FormControlLabel 
-                  value={COLORS['green']} 
-                  control={
-                    <Radio classes={{root: classes.green, checked: classes.checked}} />
-                  }
-                  label='Color Scheme'
-                />
-              </RadioGroup>
-            </FormControl> */}
+            <RadioGroup row>
+              <FormControlLabel
+                control={
+                  <Radio />
+                }
+              />
+              <FormControlLabel
+                control={
+                  <Radio />
+                }
+              />
+              <FormControlLabel
+                control={
+                  <Radio />
+                }
+              />
+            </RadioGroup>
+            {/* <RadioGroup row className={classes.settingsItem} value={this.state.colorScheme} onChange={this.handleChange('colorScheme')}>
+              <FormControlLabel 
+                value={COLORS['blue']} 
+                control={
+                  <Radio classes={{root: classes.blue, checked: classes.checked}} />
+                }
+              />
+              <FormControlLabel 
+                value={COLORS['red']} 
+                control={
+                  <Radio classes={{root: classes.red, checked: classes.checked}} />
+                }
+              />
+              <FormControlLabel 
+                value={COLORS['green']} 
+                control={
+                  <Radio classes={{root: classes.green, checked: classes.checked}} />
+                }
+                label='Color Scheme'
+              />
+            </RadioGroup> */}
           </DialogContent>
         </Dialog>
       </div>
