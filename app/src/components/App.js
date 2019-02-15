@@ -9,18 +9,20 @@ import SettingsMenu from './SettingsMenu';
 import Header from '../containers/Header';
 import Main from '../containers/Main';
 
-const styles = {
+const styles = theme => ({
   root: {
+    backgroundColor: theme.palette.background
+  },
+  container: {
     position: 'relative',
     margin: '40px auto',
-    width: 800,
-    color: '#CCC'
+    width: 800
   }
-};
+});
 
 class App extends Component {
   state = {
-    theme: 'dark'
+    theme: createMuiTheme(themes.dark)
   };
 
   handleChangeTheme = theme => {
@@ -31,23 +33,21 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
-
-    const themeBase = this.state.theme === 'dark' ? themes.dark : themes.light;
-    const theme = createMuiTheme(themeBase);
+    console.log(this.state.theme);
 
     return (
-      <MuiThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <MuiThemeProvider theme={this.state.theme}>
         <CssBaseline />
-        <div className={classes.root}>
-          <Card>
-            <CardContent>
-              <SettingsMenu onChangeTheme={this.handleChangeTheme} theme={this.state.theme} />
-              <Header />
-              <Main />
-            </CardContent>
-          </Card>
-        </div>
-      </MuiThemeProvider>
+        <Card className={classes.container}>
+          <CardContent>
+            <SettingsMenu onChangeTheme={this.handleChangeTheme} theme={this.state.theme} />
+            <Header />
+            <Main />
+          </CardContent>
+        </Card>
+        </MuiThemeProvider>
+      </div>
     );
   }
 }

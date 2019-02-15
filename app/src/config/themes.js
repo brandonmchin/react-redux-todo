@@ -13,7 +13,7 @@ export const themes = {
   light: {
     palette: {
       type: 'light',
-      primary: colors.green,
+      primary: colors.green
     },
     typography: {
       useNextVariants: true

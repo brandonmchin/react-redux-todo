@@ -13,49 +13,65 @@ import {
   Radio 
 } from '@material-ui/core';
 import { Settings } from '@material-ui/icons';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createMuiTheme } from '@material-ui/core/styles';
 
-const COLORS = {
-  blue: '#2196f3',
-  red: '#f44336',
-  green: '#4caf50'
-};
+import { themes } from '../config';
 
-const styles = {
+// const COLORS = {
+//   blue: '#2196f3',
+//   red: '#f44336',
+//   green: '#4caf50'
+// };
+
+// const styles = {
+//   icon: {
+//     position: 'absolute',
+//     top: 0,
+//     right: 0
+//   },
+//   settings: {
+//     height: '40%'
+//   },
+//   title: {
+//     textAlign: 'center'
+//   },
+//   settingsItem: {
+//     width: '100%'
+//   },
+//   blue: {
+//     color: COLORS['blue'],
+//     '&$checked': {
+//       color: COLORS['blue']
+//     }
+//   },
+//   red: {
+//     color: COLORS['red'],
+//     '&$checked': {
+//       color: COLORS['red']
+//     }
+//   },
+//   green: {
+//     color: COLORS['green'],
+//     '&$checked': {
+//       color: COLORS['green']
+//     }
+//   },
+//   checked: {}
+// };
+
+const styles = () => ({
   icon: {
     position: 'absolute',
     top: 0,
     right: 0
   },
-  settings: {
+  dialog: {
     height: '40%'
   },
   title: {
     textAlign: 'center'
-  },
-  settingsItem: {
-    width: '100%'
-  },
-  blue: {
-    color: COLORS['blue'],
-    '&$checked': {
-      color: COLORS['blue']
-    }
-  },
-  red: {
-    color: COLORS['red'],
-    '&$checked': {
-      color: COLORS['red']
-    }
-  },
-  green: {
-    color: COLORS['green'],
-    '&$checked': {
-      color: COLORS['green']
-    }
-  },
-  checked: {}
-};
+  }
+});
 
 const Transition = props => {
   return <Slide direction='down' {...props} />
@@ -63,9 +79,7 @@ const Transition = props => {
 
 class SettingsMenu extends Component {
   state = {
-    open: false,
-    // darkTheme: true,
-    colorScheme: COLORS['blue']
+    open: false
   }
 
   openSettings = () => {
@@ -80,11 +94,16 @@ class SettingsMenu extends Component {
     });
   }
 
-  handleChange = event => {
-    // this.setState({
-    //   [name]: name === 'darkTheme' ? event.target.checked : event.target.value
-    // })
-    this.props.onChangeTheme(event.target.checked ? 'dark' : 'light');
+  // handleChange = event => {
+  //   // this.setState({
+  //   //   [name]: name === 'darkTheme' ? event.target.checked : event.target.value
+  //   // })
+  //   this.props.onChangeTheme(event.target.checked ? 'dark' : 'light');
+  // }
+
+  handleChangeTheme = event => {
+    const newtheme = event.target.checked ? themes.dark : themes.light;
+    this.props.onChangeTheme(createMuiTheme(newtheme));
   }
 
   render() {
@@ -95,13 +114,13 @@ class SettingsMenu extends Component {
         <IconButton className={classes.icon} onClick={this.openSettings}>
           <Settings />
         </IconButton>
-        <Dialog className={classes.settings} open={this.state.open} TransitionComponent={Transition} onClose={this.closeSettings}>
+        <Dialog className={classes.dialog} open={this.state.open} TransitionComponent={Transition} onClose={this.closeSettings}>
           <DialogTitle className={classes.title}>Settings</DialogTitle>
           <DialogContent>
             <FormControlLabel
-              className={classes.settingsItem}
+              // className={classes.item}
               control={
-                <Switch checked={theme === 'dark'} onChange={this.handleChange} color='primary' />
+                <Switch checked={theme.palette.type === 'dark'} onChange={this.handleChangeTheme} color='primary' />
               }
               label='Dark Theme'
             />
@@ -138,7 +157,7 @@ class SettingsMenu extends Component {
 SettingsMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   onChangeTheme: PropTypes.func.isRequired,
-  theme: PropTypes.string.isRequired
+  theme: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(SettingsMenu);

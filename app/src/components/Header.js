@@ -6,8 +6,7 @@ import { withStyles } from '@material-ui/core';
 
 const styles = {
   title: {
-    textAlign: 'center',
-    color:'#CCC'
+    textAlign: 'center'
   }
 };
 
