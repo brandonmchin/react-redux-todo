@@ -68,7 +68,7 @@ class SettingsMenu extends Component {
         primary: colors[event.target.value]
       },
       typography: {
-        ...this.props.theme.typography
+        useNextVariants: true
       }
     }));
     this.setState({
@@ -87,7 +87,7 @@ class SettingsMenu extends Component {
         }
       },
       typography: {
-        ...this.props.theme.typography
+        useNextVariants: true
       }
     }));
   }
