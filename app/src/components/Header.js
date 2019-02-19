@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import TodoTextInput from './TodoTextInput';
-import { withStyles } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   title: {
@@ -21,7 +22,7 @@ class Header extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <h1 className={classes.title}>TODO LIST</h1>
+        <Typography className={classes.title} variant='h3'>TODO LIST</Typography>
         <TodoTextInput newTodo onSubmit={this.handleSubmit} placeholder="What needs to be done?" />
       </div>
     );

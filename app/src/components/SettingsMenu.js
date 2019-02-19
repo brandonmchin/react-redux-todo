@@ -6,6 +6,7 @@ import {
   DialogTitle, 
   DialogContent, 
   Slide,
+  FormLabel,
   FormControlLabel, 
   Switch, 
   RadioGroup, 
@@ -13,50 +14,7 @@ import {
 } from '@material-ui/core';
 import { Settings } from '@material-ui/icons';
 import { withStyles, createMuiTheme } from '@material-ui/core/styles';
-
-import { themes } from '../config';
-
-// const COLORS = {
-//   blue: '#2196f3',
-//   red: '#f44336',
-//   green: '#4caf50'
-// };
-
-// const styles = {
-//   icon: {
-//     position: 'absolute',
-//     top: 0,
-//     right: 0
-//   },
-//   settings: {
-//     height: '40%'
-//   },
-//   title: {
-//     textAlign: 'center'
-//   },
-//   settingsItem: {
-//     width: '100%'
-//   },
-//   blue: {
-//     color: COLORS['blue'],
-//     '&$checked': {
-//       color: COLORS['blue']
-//     }
-//   },
-//   red: {
-//     color: COLORS['red'],
-//     '&$checked': {
-//       color: COLORS['red']
-//     }
-//   },
-//   green: {
-//     color: COLORS['green'],
-//     '&$checked': {
-//       color: COLORS['green']
-//     }
-//   },
-//   checked: {}
-// };
+import { colors } from '@material-ui/core';
 
 const styles = () => ({
   icon: {
@@ -64,10 +22,22 @@ const styles = () => ({
     top: 0,
     right: 0
   },
+  dialog: {
+    top: '-50%'
+  },
   title: {
     textAlign: 'center'
-  }
+  },
+  // CSS variables
+  radio: {
+    color: 'var(--radio-color)',
+    '&$checked': {
+      color: 'var(--radio-color)'
+    }
+  },
+  checked: {}
 });
+
 
 const Transition = props => {
   return <Slide direction='down' {...props} />
@@ -75,7 +45,8 @@ const Transition = props => {
 
 class SettingsMenu extends Component {
   state = {
-    open: false
+    open: false,
+    radioColor: 'green'
   }
 
   openSettings = () => {
@@ -90,16 +61,35 @@ class SettingsMenu extends Component {
     });
   }
 
-  // handleChange = event => {
-  //   // this.setState({
-  //   //   [name]: name === 'darkTheme' ? event.target.checked : event.target.value
-  //   // })
-  //   this.props.onChangeTheme(event.target.checked ? 'dark' : 'light');
-  // }
+  handleChangeColor = event => {
+    this.props.onChangeTheme(createMuiTheme({
+      palette: {
+        ...this.props.theme.palette,
+        primary: colors[event.target.value]
+      },
+      typography: {
+        ...this.props.theme.typography
+      }
+    }));
+    this.setState({
+      radioColor: event.target.value
+    })
+  }
 
   handleChangeTheme = event => {
-    const newtheme = event.target.checked ? themes.dark : themes.light;
-    this.props.onChangeTheme(createMuiTheme(newtheme));
+    this.props.onChangeTheme(createMuiTheme({
+      palette: {
+        type: event.target.checked ? 'dark' : 'light',
+        primary: colors[this.state.radioColor],
+        background: {
+          default: event.target.checked ? '#303030' : '#DDD',
+          paper: event.target.checked ? '#424242' : '#FFF'
+        }
+      },
+      typography: {
+        ...this.props.theme.typography
+      }
+    }));
   }
 
   render() {
@@ -110,53 +100,48 @@ class SettingsMenu extends Component {
         <IconButton className={classes.icon} onClick={this.openSettings}>
           <Settings />
         </IconButton>
-        <Dialog open={this.state.open} TransitionComponent={Transition} onClose={this.closeSettings} keepMounted fullWidth>
+        <Dialog className={classes.dialog} open={this.state.open} TransitionComponent={Transition} onClose={this.closeSettings} keepMounted>
           <DialogTitle className={classes.title}>Settings</DialogTitle>
           <DialogContent>
-            <FormControlLabel
-              control={
-                <Switch checked={theme.palette.type === 'dark'} onChange={this.handleChangeTheme} color='primary' />
-              }
-              label='Dark Theme'
-            />
-            <RadioGroup row>
+            <FormLabel>Light</FormLabel>
+            <Switch checked={theme.palette.type === 'dark'} onChange={this.handleChangeTheme} color='primary' />
+            <FormLabel>Dark</FormLabel>
+          </DialogContent>
+          <DialogContent>
+            <FormLabel style={{margin: 'auto 0', marginRight: '16px'}}>Main Color</FormLabel>
+            <RadioGroup value={this.state.radioColor} onChange={this.handleChangeColor} row>
               <FormControlLabel
+                value='red'
                 control={
-                  <Radio />
+                  <Radio style={{'--radio-color': colors.red[500]}} classes={{root: classes.radio, checked: classes.checked}} />
                 }
               />
               <FormControlLabel
+                value='green'
                 control={
-                  <Radio />
+                  <Radio style={{'--radio-color': colors.green[500]}} classes={{root: classes.radio, checked: classes.checked}} />
                 }
               />
               <FormControlLabel
+                value='blue'
                 control={
-                  <Radio />
+                  <Radio style={{'--radio-color': colors.blue[500]}} classes={{root: classes.radio, checked: classes.checked}} />
                 }
               />
+               <FormControlLabel
+               value='purple'
+                control={
+                  <Radio style={{'--radio-color': colors.purple[500]}} classes={{root: classes.radio, checked: classes.checked}} />
+                }
+              />
+              <FormControlLabel
+                value='pink'
+                control={
+                  <Radio style={{'--radio-color': colors.pink[500]}} classes={{root: classes.radio, checked: classes.checked}} />
+                }
+              />
+              
             </RadioGroup>
-            {/* <RadioGroup row className={classes.settingsItem} value={this.state.colorScheme} onChange={this.handleChange('colorScheme')}>
-              <FormControlLabel 
-                value={COLORS['blue']} 
-                control={
-                  <Radio classes={{root: classes.blue, checked: classes.checked}} />
-                }
-              />
-              <FormControlLabel 
-                value={COLORS['red']} 
-                control={
-                  <Radio classes={{root: classes.red, checked: classes.checked}} />
-                }
-              />
-              <FormControlLabel 
-                value={COLORS['green']} 
-                control={
-                  <Radio classes={{root: classes.green, checked: classes.checked}} />
-                }
-                label='Color Scheme'
-              />
-            </RadioGroup> */}
           </DialogContent>
         </Dialog>
       </div>

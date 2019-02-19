@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ListItem, Checkbox, IconButton } from '@material-ui/core';
+import { ListItem, Checkbox, IconButton, Typography } from '@material-ui/core';
 import { Clear } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 
 import TodoTextInput from './TodoTextInput';
 
 const styles = theme => ({
-  item: {
-    // backgroundColor: '#555',
-    // backgroundColor: theme.palette.type === 'dark' ? '#555' : '#FFF',
-    // '&:hover': {
-    //   backgroundColor: theme.palette.type === 'dark' ? '#666' : '#FFF'
-    // }
-  },
   delete: {
     margin: 0,
     position: 'absolute',
@@ -69,7 +62,7 @@ class TodoItem extends Component {
     else {
       element = (
         <div>
-          <label className={todo.isActive ? classes.active : classes.completed}>{todo.text}</label>
+          <Typography variant='body1' className={todo.isActive ? classes.active : classes.completed}>{todo.text}</Typography>
           <IconButton className={classes.delete} onClick={() => deleteTodo(todo.id)}>
             <Clear />
           </IconButton>
@@ -78,7 +71,7 @@ class TodoItem extends Component {
     }
 
     return (
-      <ListItem className={classes.item} onDoubleClick={this.handleDoubleClick} button disableRipple divider>
+      <ListItem onDoubleClick={this.handleDoubleClick} button disableRipple divider>
         <Checkbox checked={!todo.isActive} onChange={() => completeTodo(todo.id)} color="primary"/>
         {element}
       </ListItem>

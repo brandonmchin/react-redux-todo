@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Divider, Button, Grid } from '@material-ui/core';
+import { Tabs, Divider, Button, Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import FilterLink from '../containers/FilterLink';
@@ -42,12 +42,16 @@ class Footer extends Component {
     return (
       <footer>
         <Grid className={classes.grid} container spacing={24}>
-          <Grid className={classes.count} item xs={6}><strong>{activeCount || 'No'}</strong> {itemWord} remaining</Grid>
+          <Grid className={classes.count} item xs={6}>
+            <Typography variant='h6'><strong>{activeCount || 'No'}</strong> {itemWord} remaining</Typography>
+          </Grid>
           <Grid className={classes.clear} item xs={6}>
             &nbsp;
             {
               !!completedCount &&
-              <Button variant='contained' color='primary' onClick={onClearCompleted}>Clear Completed</Button>
+              <Button variant='contained' color='primary' onClick={onClearCompleted}>
+                <Typography>Clear Completed</Typography>
+              </Button>
             }
           </Grid>
         </Grid>

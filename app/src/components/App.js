@@ -21,7 +21,7 @@ const styles = theme => ({
 
 class App extends Component {
   state = {
-    theme: createMuiTheme(themes.dark)
+    theme: createMuiTheme(themes.default)
   };
 
   handleChangeTheme = theme => {
@@ -32,7 +32,6 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.state.theme);
 
     return (
       <div className={classes.root}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox } from '@material-ui/core';
+import { Checkbox, Typography } from '@material-ui/core';
 import { DoneAll, CheckBoxOutlineBlank } from '@material-ui/icons';
 
 import VisibleTodoList from '../containers/VisibleTodoList';
@@ -11,14 +11,16 @@ const Main = ({ todoCount, completedCount, actions }) => (
     {
       !!todoCount && 
       <div>
-        <Checkbox 
-          checked={completedCount === todoCount} 
-          onChange={actions.completeAllTodos}
-          color="primary" 
-          icon={<CheckBoxOutlineBlank />} 
-          checkedIcon={<DoneAll />} 
-        />
-        <label>Complete All</label>
+        <Typography variant='h6'>
+          <Checkbox 
+            checked={completedCount === todoCount} 
+            onChange={actions.completeAllTodos}
+            color="primary" 
+            icon={<CheckBoxOutlineBlank />} 
+            checkedIcon={<DoneAll />}
+          />
+          <label>Complete All</label>
+        </Typography>
       </div>
     }
     <VisibleTodoList />
